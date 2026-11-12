@@ -17,22 +17,19 @@ concurrency:
 jobs:
   build:
     name: Compilar APK Android
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
 
     steps:
       - name: Descargar codigo fuente
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      # No usar cache: gradle aqui: setup-java falla si todavia no encuentra
-      # archivos Gradle en la raiz del repositorio.
       - name: Configurar Java JDK 17
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: '17'
 
-      # Busca el proyecto tanto en la raiz como dentro de una carpeta anidada.
       - name: Localizar proyecto Android
         shell: bash
         run: |
@@ -41,31 +38,27 @@ jobs:
             -not -path '*/.gradle/*' -not -path '*/build/*' | sort | head -n 1)"
 
           if [ -z "$SETTINGS_FILE" ]; then
-            echo "::error::No se encontro settings.gradle.kts. Sube al repositorio el contenido del ZIP, incluyendo settings.gradle.kts, build.gradle.kts y la carpeta app/."
-            echo "Archivos encontrados en el repositorio:"
-            find . -maxdepth 4 -type f | sort | head -n 200
+            echo "::error::No existe settings.gradle.kts. Debes subir TODO el contenido de este ZIP al repositorio, no solamente main.yml."
+            echo "Contenido actual del repositorio:"
+            find . -maxdepth 5 -type f | sort
             exit 1
           fi
 
           PROJECT_DIR="$(dirname "$SETTINGS_FILE")"
-          if [ "$PROJECT_DIR" = "." ]; then
-            PROJECT_DIR="."
-          fi
-
-          test -f "$PROJECT_DIR/build.gradle.kts"
-          test -f "$PROJECT_DIR/app/build.gradle.kts"
-          test -f "$PROJECT_DIR/app/src/main/AndroidManifest.xml"
-
+          test -f "$PROJECT_DIR/build.gradle.kts" || { echo "::error::Falta build.gradle.kts"; exit 1; }
+          test -f "$PROJECT_DIR/app/build.gradle.kts" || { echo "::error::Falta app/build.gradle.kts"; exit 1; }
+          test -f "$PROJECT_DIR/app/src/main/AndroidManifest.xml" || { echo "::error::Falta AndroidManifest.xml"; exit 1; }
           echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
           echo "Proyecto Android localizado en: $PROJECT_DIR"
 
-      # Instala/usa Gradle 8.9 sin depender de gradlew ni gradle-wrapper.jar.
-      - name: Compilar APK con Gradle 8.9
-        uses: gradle/gradle-build-action@v3
+      - name: Instalar Gradle 8.9
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: '8.9'
-          build-root-directory: ${{ env.PROJECT_DIR }}
-          arguments: assembleDebug --no-daemon --stacktrace
+
+      - name: Compilar APK Debug
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: gradle assembleDebug --no-daemon --stacktrace
 
       - name: Verificar APK generado
         shell: bash
@@ -73,14 +66,14 @@ jobs:
           set -euo pipefail
           APK_PATH="${PROJECT_DIR}/app/build/outputs/apk/debug/app-debug.apk"
           if [ ! -s "$APK_PATH" ]; then
-            echo "::error::La compilacion termino, pero no se encontro el APK: $APK_PATH"
-            find "$PROJECT_DIR/app/build/outputs" -maxdepth 5 -type f 2>/dev/null || true
+            echo "::error::No se genero el APK esperado: $APK_PATH"
+            find "${PROJECT_DIR}/app/build/outputs" -maxdepth 5 -type f 2>/dev/null || true
             exit 1
           fi
           ls -lh "$APK_PATH"
 
       - name: Publicar APK como artefacto
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: SENDA-PLUS-APK-${{ github.run_number }}
           path: ${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/app-debug.apk
