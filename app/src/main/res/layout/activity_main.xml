@@ -11,7 +11,9 @@
         android:id="@+id/video_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/senda_black">
+        android:background="@color/senda_black"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <androidx.media3.ui.PlayerView
             android:id="@+id/player_view"
@@ -31,8 +33,9 @@
             android:paddingTop="12dp"
             android:paddingEnd="28dp"
             android:paddingBottom="12dp"
-            android:background="#990A0A0E"
-            android:visibility="visible">
+            android:background="#CC0A1020"
+            android:elevation="8dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/channel_number"
@@ -54,11 +57,12 @@
         </LinearLayout>
     </FrameLayout>
 
+    <!-- La guía se mantiene oculta y se abre con OK o toque en pantalla. -->
     <LinearLayout
         android:id="@+id/guide_panel"
         android:layout_width="340dp"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
+        android:layout_gravity="start"
         android:orientation="vertical"
         android:background="@color/senda_panel"
         android:padding="12dp"
@@ -74,13 +78,32 @@
             android:textSize="22sp"
             android:padding="12dp" />
 
-        <Button
-            android:id="@+id/import_button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="IMPORTAR LISTA M3U"
-            android:textColor="@color/senda_white"
-            android:backgroundTint="@color/senda_purple" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/import_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="IMPORTAR M3U"
+                android:textSize="11sp"
+                android:textColor="@color/senda_white"
+                android:backgroundTint="@color/senda_purple" />
+
+            <Button
+                android:id="@+id/playlists_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:text="MIS LISTAS"
+                android:textSize="11sp"
+                android:textColor="@color/senda_white"
+                android:backgroundTint="@color/senda_purple_dark" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/channel_list"
@@ -94,9 +117,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CH+ / CH−  ·  OK PARA VER"
+            android:text="CH+ / CH− · OK PARA VER · ATRÁS PARA CERRAR"
             android:textColor="#BDB5C8"
-            android:textSize="12sp"
+            android:textSize="11sp"
             android:gravity="center"
             android:padding="10dp" />
     </LinearLayout>
