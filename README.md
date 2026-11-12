@@ -26,3 +26,10 @@ Utiliza JDK 17 y Gradle 8.9. El APK Debug se publica como Artifact.
 Las URLs de canales de ejemplo incluidas en M3uManager.kt deben ser
 reemplazadas por fuentes legítimas y autorizadas. Para diagnosticar un
 canal negro se requiere conocer su URL autorizada y los códecs reales.
+
+
+## Compatibilidad de compilacion
+- Android compileSdk 36 (requerido por LibVLC 3.7.7).
+- Android Gradle Plugin 8.13.2.
+- Gradle 8.13 y JDK 17.
+- targetSdk permanece en 35 para separar compileSdk de cambios de comportamiento en ejecucion.
