@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.SendaPlus" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/senda_purple</item>
+        <item name="colorPrimaryVariant">@color/senda_purple_dark</item>
+        <item name="colorOnPrimary">@color/senda_white</item>
+        <item name="android:windowBackground">@color/senda_black</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:navigationBarColor">@color/senda_black</item>
+        <item name="android:statusBarColor">@color/senda_black</item>
+    </style>
+</resources>

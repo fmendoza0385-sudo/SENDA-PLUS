@@ -1,0 +1,5 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:gravity="center" android:background="@color/senda_black" android:padding="28dp">
+    <ImageView android:layout_width="220dp" android:layout_height="90dp" android:src="@drawable/logo_senda_plus" android:contentDescription="Logo SENDA PLUS" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TELEVISION PARA DISFRUTAR" android:textColor="@color/senda_white" android:textSize="14sp" android:letterSpacing="0.15" android:layout_marginTop="18dp" />
+    <ProgressBar android:layout_width="220dp" android:layout_height="5dp" style="?android:attr/progressBarStyleHorizontal" android:indeterminate="true" android:indeterminateTint="@color/senda_purple" android:layout_marginTop="30dp" />
+</LinearLayout>

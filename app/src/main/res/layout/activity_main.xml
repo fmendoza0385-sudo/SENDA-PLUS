@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal" android:background="@color/senda_black">
+    <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
+        <androidx.media3.ui.PlayerView android:id="@+id/player_view" android:layout_width="match_parent" android:layout_height="match_parent" app:use_controller="true" app:show_buffering="when_playing" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="top" android:orientation="vertical" android:padding="14dp" android:background="#990A0A0E">
+            <TextView android:id="@+id/channel_number" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="101" android:textColor="@color/senda_purple" android:textSize="22sp" android:textStyle="bold" />
+            <TextView android:id="@+id/channel_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SENDA PLUS" android:textColor="@color/senda_white" android:textSize="18sp" android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <LinearLayout android:layout_width="300dp" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/senda_panel" android:padding="10dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="GUÍA DE CANALES" android:textColor="@color/senda_white" android:textStyle="bold" android:textSize="18sp" android:padding="10dp" />
+        <Button android:id="@+id/import_button" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="IMPORTAR LISTA M3U" android:backgroundTint="@color/senda_purple" />
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/channel_list" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:focusable="true" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="CH+ / CH−  ·  OK PARA VER" android:textColor="#BDB5C8" android:textSize="11sp" android:gravity="center" android:padding="8dp" />
+    </LinearLayout>
+</LinearLayout>

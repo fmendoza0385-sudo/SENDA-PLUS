@@ -1,0 +1,4 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/selector_channel_item" android:focusable="true" android:clickable="true" android:padding="10dp">
+    <TextView android:id="@+id/item_number" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="101" android:textColor="@color/senda_purple" android:textStyle="bold" android:textSize="13sp" />
+    <TextView android:id="@+id/item_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Canal 1" android:textColor="@color/senda_white" android:textSize="15sp" />
+</LinearLayout>
