@@ -41,7 +41,7 @@
                 android:id="@+id/channel_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="101"
+                android:text="100"
                 android:textColor="@color/senda_purple"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -57,7 +57,6 @@
         </LinearLayout>
     </FrameLayout>
 
-    <!-- La guía se mantiene oculta y se abre con OK o toque en pantalla. -->
     <LinearLayout
         android:id="@+id/guide_panel"
         android:layout_width="340dp"
@@ -78,31 +77,23 @@
             android:textSize="22sp"
             android:padding="12dp" />
 
+        <!-- Controles ocultos: la APK utiliza exclusivamente la lista incluida. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/import_button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="IMPORTAR M3U"
-                android:textSize="11sp"
-                android:textColor="@color/senda_white"
-                android:backgroundTint="@color/senda_purple" />
+                android:text="IMPORTAR M3U" />
 
             <Button
                 android:id="@+id/playlists_button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:text="MIS LISTAS"
-                android:textSize="11sp"
-                android:textColor="@color/senda_white"
-                android:backgroundTint="@color/senda_purple_dark" />
+                android:text="MIS LISTAS" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
